@@ -1,0 +1,37 @@
+<%= form_with(model: pizza, local: true) do |form| %>
+  <% if pizza.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(pizza.errors.count, "error") %> prohibited this pizza from being saved:</h2>
+
+      <ul>
+      <% pizza.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nome %>
+    <%= form.text_field :nome, id: :pizza_nome %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ingredientes %>
+    <%= form.text_field :ingredientes, id: :pizza_ingredientes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tamanho %>
+    <%= form.text_field :tamanho, id: :pizza_tamanho %>
+  </div>
+
+  <div class="field">
+    <%= form.label :preco %>
+    <%= form.text_field :preco, id: :pizza_preco %> 
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
