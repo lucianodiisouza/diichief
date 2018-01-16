@@ -39,6 +39,11 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 # estilizando com boostrap
 gem 'jquery-datatables-rails', '~> 3.4'
 # adicionar datatable pra pesquisa
+gem 'devise', '~> 4.4'
+# devise para o usuario fazer login, e bloquear algumas páginas para o usuário final
+gem 'omniauth-facebook'
+# omniauth pra fazer login com facebook
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

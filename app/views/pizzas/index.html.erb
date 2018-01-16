@@ -8,7 +8,7 @@
   <body>
 <!-- RubyStart  -->
 <!--  barra de navegação -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
   <a class="navbar-brand" href="#">Dii Chief</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -22,58 +22,89 @@
       <li class="nav-item">
         <a class="nav-link" href="#">Bebidas</a>
       </li>
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> -->
       <li class="nav-item">
         <a class="nav-link" href="#">Massas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Outros</a>
       </li>
-    </ul>
+</ul>
+<!-- dropdownmenu -->
+<li class="nav-item dropdown" style="list-style: none;">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+    <% unless current_user %>
+      Conectar
+    <% else %>
+      <%= current_user[:image] %><%= current_user[:name] %>
+    <% end %>
+  </a>
+    <div class="dropdown-menu">
+      <!-- formulario -->
+      <% unless current_user %>
+        <%= form_for :user do |f|  %>
+        <%= f.label "Email", :style => "margin-left: 2%;" %> <br>
+        <%= f.text_field :email, :value => "", :type => "email", :class => "form-control", :name => "user[email]", :placeholder => "email@exemplo.com", :style => "width: 95%; margin-left: 2%;" %><br>
+        <%= f.label "Senha" , :style => "margin-left: 2%;" %> <br>
+        <%= f.password_field :password, :class => "form-control", :name => "user[password]", :style => "width: 95%; margin-left: 2%;"  %><br>
+        <%= link_to "Entrar", user_session_path, :type => "submit", :value => "Log in", :name => "commit", :class => "btn btn-primary", :style => "margin-left: 105px;" %>
+        <%= hidden_field(:signup, :pass_confirm) %>
+      <% end %>
+      <!-- fim do formulário -->
+        <div class="dropdown-divider"></div> <!--divisoria  -->
+        <%= link_to "Esqueci minha senha", new_user_password_path, :class => "dropdown-item" %><!-- esqueci minha senha -->
+        <%= link_to "Entrar com o Facebook", user_facebook_omniauth_authorize_path, :class => "dropdown-item" %><!--Login com Facebook -->
+        <%= link_to "Novo por aqui? Cadastre-se", new_user_registration_path, :class => "dropdown-item" %><!-- novo por aqui? -->
+      <% else %>
+        <a class="dropdown-item disabled" href="#">Meus pedidos</a>
+        <%= link_to "Editar Perfil", edit_user_registration_path, :class => "dropdown-item" %>
+        <div class="dropdown-divider"></div> <!--divisoria  -->
+        <%= link_to "Desconectar", destroy_user_session_path, method: :delete, :class => "dropdown-item" %>
+      <% end %>
+    </div>
+  </li>
+  <!-- fim do dropdownmenu -->
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <!--  form de pesquisa -->
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Busca" aria-label="Search">
-      <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Busca</button>
     </form>
+    <!-- fim do form de pesquisa -->
   </div>
 </nav>
 <!--  fim da barra de navegação -->
-<main role="main" class="container">
 
+<img src="top_banner.png" alt="" width="100%" height="300px">
+  <!-- adicionar modal -->
     <p id="notice"><%= notice %></p>
+<!-- modal -->
+    <div class="container">
+
+
+      <div class="row">
       <% @pizzas.each do |pizza| %>
       <!--  para cada registro no banco de dados, será gerado um container desses ??? -->
-        <div class="row">
-          <div class="col-lg-3">
-            <div class="card text-right">
-              <img class="card-img-top" src="pizza_a.png" alt="<%= pizza.nome %>">
-              <div class="card-body">
-                <h5 class="card-title"><%= pizza.nome %></h5>
-                <p class="card-text"><%= pizza.ingredientes %>.</p>
-                R$ <%= pizza.preco %> - Tam.: <%= pizza.tamanho %> &nbsp;&nbsp;&nbsp; <%= link_to 'Ver', pizza, :class => "btn btn-danger" %>
+          <div class="col">
+            <div class="col-sm">
+              <div class="card text-right" style="width: 18rem;">
+                <img class="card-img-top" src="pizza_a.png" alt="<%= pizza.nome %>">
+                <div class="card-body">
+                  <h5 class="card-title"><%= pizza.nome %></h5>
+                  <p class="card-text"><%= pizza.ingredientes %>.</p>
+                  R$ <%= pizza.preco %> - Tam.: <%= pizza.tamanho %> &nbsp;&nbsp;&nbsp; <%= link_to 'Ver', pizza, :class => "btn btn-danger" %>
+                </div>
               </div>
+              <br>
+
+              <!--
+              <%= link_to 'Edit', edit_pizza_path(pizza) %>
+              <%= link_to 'Destroy', pizza, method: :delete, data: { confirm: 'Are you sure?' } %>
+              -->
             </div>
-            <!-- <td><%= pizza.tamanho %></td>
-            <td>R$ <%= pizza.preco %></td>
-
-            <%= link_to 'Edit', edit_pizza_path(pizza) %>
-            <%= link_to 'Destroy', pizza, method: :delete, data: { confirm: 'Are you sure?' } %>
-            -->
           </div>
-        </div>
-      </div>
-      <br>
       <% end %>
-
+    </div>
+  </div>
     <!-- <%= link_to 'New Pizza', new_pizza_path %> -->
 <!-- RubyEnd  -->
 <!-- call_to_action botao no site whatsapp e Facebook -->
@@ -96,6 +127,5 @@
     })();
 </script>
 <!-- call_to_action botao no site whatsapp e Facebook -->
-</main>
   </body>
 </html>
