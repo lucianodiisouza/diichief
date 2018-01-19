@@ -3,6 +3,11 @@
 WebApp da DiiChief
 Codificado em Ruby/Rails (latest)
 Bootstrap dita a moda
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+> V. 1.2.1 - ChangeLog
+
++ Filtragem de pedidos pelo ID do usuário na página "Meus Pedidos"
 
  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 

@@ -33,3 +33,126 @@ trigger do modal
 
 
 <%= link_to 'my site', 'mysite.example.com', { :class => 'tooltips', 'data-toggle' => 'tooltip', 'data-placement' => 'top', :title => '', 'data-original-title' => 'Facebook' } %>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+<%= render 'layouts/header' %>
+
+<% unless current_user %>
+  <script>
+   $(document).ready(function(){
+    $('#exigirLogin').modal('show');
+   });
+  </script>
+  <!-- Modal -->
+  <div class="modal fade" id="exigirLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Usuário desconectado!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <%= form_for(:user, :url => session_path(:user)) do |f|  %>
+          <%= f.label "Email", :style => "margin-left: 2%;" %> <br>
+          <%= f.text_field :email, :value => "", :type => "email", :class => "form-control", :name => "user[email]", :placeholder => "email@exemplo.com", :style => "width: 95%; margin-left: 2%;" %><br>
+          <%= f.label "Senha" , :style => "margin-left: 2%;" %> <br>
+          <%= f.password_field :password, :class => "form-control", :name => "user[password]", :style => "width: 95%; margin-left: 2%;"  %><br>
+          <center>
+            <%= f.submit 'Entrar', :class => "btn btn-primary btn-lg" %>
+          </center>
+        <% end %>
+        <!-- fim do formulário -->
+          <div class="dropdown-divider"></div> <!--divisoria  -->
+          <%= link_to "Esqueci minha senha", new_user_password_path, :class => "dropdown-item" %><!-- esqueci minha senha -->
+          <%= link_to "Entrar com o Facebook", user_facebook_omniauth_authorize_path, :class => "dropdown-item" %><!--Login com Facebook -->
+          <%= link_to "Novo por aqui? Cadastre-se", new_user_registration_path, :class => "dropdown-item" %><!-- novo por aqui? -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+
+  <p id="notice"><%= notice %></p>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+  
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nº Pedido</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Status</th>
+            <th scope="col">Total</th>
+            <th scope="col">Obs.</th>
+          </tr>
+        </thead>
+        <% @meupedidos.each do |meupedido| %>
+        <tbody>
+          <tr>
+            <th scope="row"><%= meupedido.id %></th>
+            <td><%= meupedido.descricao %></td>
+            <td><%= meupedido.status %></td>
+            <td><%= meupedido.total %></td>
+            <td><%= meupedido.obs %></td>
+          </tr>
+        <% end %>  
+        </tbody>
+      </table>
+
+
+    
+  <br>
+
+<%= link_to 'New Meupedido', new_meupedido_path %>
+
+<% end %>
+</div>
+
+
+
+
+      <td><%= link_to 'Show', meupedido %></td>
+        <td><%= link_to 'Edit', edit_meupedido_path(meupedido) %></td>
+        <td><%= link_to 'Destroy', meupedido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
