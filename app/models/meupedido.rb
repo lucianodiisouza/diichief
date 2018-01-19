@@ -1,0 +1,2 @@
+class Meupedido < ApplicationRecord
+end

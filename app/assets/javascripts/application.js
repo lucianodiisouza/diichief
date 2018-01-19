@@ -14,4 +14,14 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery
+//= require jquery.flexslider
 //= require_tree .
+
+$(document).ready(function(){
+	$('.flexslider').flexslider({
+	animation: "slide",
+    controlsContainer: $(".custom-controls-container"),
+    customDirectionNav: $(".custom-navigation a")
+	});
+});
+

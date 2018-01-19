@@ -1,131 +1,113 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title></title>
-  </head>
-  <body>
-<!-- RubyStart  -->
-<!--  barra de navegação -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <a class="navbar-brand" href="#">Dii Chief</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Pizzas <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Bebidas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Massas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Outros</a>
-      </li>
-</ul>
-<!-- dropdownmenu -->
-<li class="nav-item dropdown" style="list-style: none;">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
-    <% unless current_user %>
-      Conectar
-    <% else %>
-      <%= current_user[:image] %><%= current_user[:name] %>
-    <% end %>
-  </a>
-    <div class="dropdown-menu">
-      <!-- formulario -->
-      <% unless current_user %>
-        <%= form_for :user do |f|  %>
-        <%= f.label "Email", :style => "margin-left: 2%;" %> <br>
-        <%= f.text_field :email, :value => "", :type => "email", :class => "form-control", :name => "user[email]", :placeholder => "email@exemplo.com", :style => "width: 95%; margin-left: 2%;" %><br>
-        <%= f.label "Senha" , :style => "margin-left: 2%;" %> <br>
-        <%= f.password_field :password, :class => "form-control", :name => "user[password]", :style => "width: 95%; margin-left: 2%;"  %><br>
-        <%= link_to "Entrar", user_session_path, :type => "submit", :value => "Log in", :name => "commit", :class => "btn btn-primary", :style => "margin-left: 105px;" %>
-        <%= hidden_field(:signup, :pass_confirm) %>
-      <% end %>
-      <!-- fim do formulário -->
-        <div class="dropdown-divider"></div> <!--divisoria  -->
-        <%= link_to "Esqueci minha senha", new_user_password_path, :class => "dropdown-item" %><!-- esqueci minha senha -->
-        <%= link_to "Entrar com o Facebook", user_facebook_omniauth_authorize_path, :class => "dropdown-item" %><!--Login com Facebook -->
-        <%= link_to "Novo por aqui? Cadastre-se", new_user_registration_path, :class => "dropdown-item" %><!-- novo por aqui? -->
-      <% else %>
-        <a class="dropdown-item disabled" href="#">Meus pedidos</a>
-        <%= link_to "Editar Perfil", edit_user_registration_path, :class => "dropdown-item" %>
-        <div class="dropdown-divider"></div> <!--divisoria  -->
-        <%= link_to "Desconectar", destroy_user_session_path, method: :delete, :class => "dropdown-item" %>
-      <% end %>
-    </div>
-  </li>
-  <!-- fim do dropdownmenu -->
+<!-- renderizar o partial do header -->
+<%= render 'layouts/header' %>
+<!-- renderizar o partial do header -->
 
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <!--  form de pesquisa -->
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Busca" aria-label="Search">
-    </form>
-    <!-- fim do form de pesquisa -->
-  </div>
-</nav>
-<!--  fim da barra de navegação -->
+<!-- slider topo -->
+<!-- renderizar o partial do slider -->
+<%= render 'layouts/slider' %>
+<!-- renderizar o partial do slider -->
+<!-- slider topo -->
 
-<img src="top_banner.png" alt="" width="100%" height="300px">
+
   <!-- adicionar modal -->
-    <p id="notice"><%= notice %></p>
-<!-- modal -->
-    <div class="container">
+    <!-- <p id="notice"><%= notice %></p> -->
+  <!-- modal -->
+      <div class="container">
+    <% unless current_user %>
+        <div class="row">
+        <!--  deslogado -->
+        <% @pizzas.each do |pizza| %>
 
-
-      <div class="row">
-      <% @pizzas.each do |pizza| %>
-      <!--  para cada registro no banco de dados, será gerado um container desses ??? -->
-          <div class="col">
-            <div class="col-sm">
-              <div class="card text-right" style="width: 18rem;">
-                <img class="card-img-top" src="pizza_a.png" alt="<%= pizza.nome %>">
-                <div class="card-body">
-                  <h5 class="card-title"><%= pizza.nome %></h5>
-                  <p class="card-text"><%= pizza.ingredientes %>.</p>
-                  R$ <%= pizza.preco %> - Tam.: <%= pizza.tamanho %> &nbsp;&nbsp;&nbsp; <%= link_to 'Ver', pizza, :class => "btn btn-danger" %>
+            <!-- M O D A L -->
+              <script>
+               $('#<%= pizza.nome %>').on('shown.bs.modal', function () {
+                $('#verPizza').trigger('focus')
+              });
+              </script>
+              <div class="modal fade" id="<%= pizza.nome %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle"><%= pizza.nome %></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                     <%= pizza.ingredientes %>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <br>
+            <!-- M O D A L  -->
 
-              <!--
-              <%= link_to 'Edit', edit_pizza_path(pizza) %>
-              <%= link_to 'Destroy', pizza, method: :delete, data: { confirm: 'Are you sure?' } %>
-              -->
+            <div class="col">
+              <div class="col-sm">
+                <div class="card text-right" style="width: 18rem;">
+                  <img class="card-img-top" src="pizza_a.png" alt="<%= pizza.nome %>">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= pizza.nome %></h5>
+                    <p class="card-text"><%= pizza.ingredientes %>.</p>
+                    <%= valor_formatado(pizza.preco) %> - Tam.: <%= pizza.tamanho %> &nbsp;&nbsp;&nbsp; 
+                    <%= button_tag '', :class => "btn btn-success fa fa-eye", 'data-target' => "#"+pizza.nome, 'data-toggle' => 'modal', 'type' => 'button' %>
+                  </div>
+                </div>
+                <br>
+             </div>
             </div>
-          </div>
-      <% end %>
-    </div>
-  </div>
-    <!-- <%= link_to 'New Pizza', new_pizza_path %> -->
-<!-- RubyEnd  -->
+          <% end %>
+        </div>
+      </div>        
+    <% else %>
+    <!--  logado -->
+    <div class="row">
+        <% @pizzas.each do |pizza| %>
+
+          <!-- M O D A L -->
+            <script>
+             $('#<%= pizza.nome %>').on('shown.bs.modal', function () {
+              $('#verPizza').trigger('focus')
+            });
+            </script>
+            <div class="modal fade" id="<%= pizza.nome %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle"><%= pizza.nome %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                   <%= pizza.ingredientes %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- M O D A L  -->
+
+            <div class="col">
+              <div class="col-sm">
+                <div class="card text-right" style="width: 18rem;">
+                  <img class="card-img-top" src="pizza_a.png" alt="<%= pizza.nome %>">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= pizza.nome %></h5>
+                    <p class="card-text"><%= pizza.ingredientes %>.</p>
+                     <%= valor_formatado(pizza.preco) %> - Tam.: <%= pizza.tamanho %> 
+                     <%= link_to '', pizza, :class => "btn btn-danger fa fa-cart-plus" %>
+                     <%= button_tag '', :class => "btn btn-success fa fa-eye", 'data-target' => "#"+pizza.nome, 'data-toggle' => 'modal', 'type' => 'button' %>
+
+                  </div>
+                </div>
+                <br>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div> 
+    <% end %>
+   
 <!-- call_to_action botao no site whatsapp e Facebook -->
-<script type="text/javascript">
-    (function () {
-        var options = {
-            facebook: "664131617107142", // Facebook page ID
-            whatsapp: "+5531987806772", // WhatsApp number
-            company_logo_url: "//storage.whatshelp.io/widget/24/2441/24417b1c8439031fcbce5c5df7bea865/21557581_706853589501611_1188719055547661691_n.jpg", // URL of company logo (png, jpg, gif)
-            greeting_message: "Entre em contato e faça seu pedido sem sair de casa!", // Text of greeting message
-            call_to_action: "Faça seu pedido aqui!", // Call to action
-            button_color: "#E74339", // Color of button
-            position: "right", // Position may be 'right' or 'left'
-            order: "facebook,whatsapp" // Order of buttons
-        };
-        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
-        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
-        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
-        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
-    })();
-</script>
-<!-- call_to_action botao no site whatsapp e Facebook -->
-  </body>
-</html>
+<!-- rodape partial -->
+<%= render 'layouts/rodape' %>

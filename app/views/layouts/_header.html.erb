@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+  </head>
+  <body>
+<!-- RubyStart  -->
+<!--  barra de navegação -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="http://localhost:3000">Dii Chief</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://localhost:3000">Pizzas <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/bebidas">Bebidas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Massas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Outros</a>
+      </li>
+  </ul>
+<!-- dropdownmenu -->
+<li class="nav-item dropdown" style="list-style: none;">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+    <!-- desconectado -->
+    <% unless current_user %>
+      Conectar
+    <% else %>
+    <!-- conectado -->
+      <%= current_user[:image] %><%= current_user[:name] %>
+    <% end %>
+  </a>
+    <div class="dropdown-menu">
+      <!-- formulario -->
+      <% unless current_user %>
+      <!-- desconectado -->
+        <%= form_for(:user, :url => session_path(:user)) do |f|  %>
+        <%= f.label "Email", :style => "margin-left: 2%;" %> <br>
+        <%= f.text_field :email, :value => "", :type => "email", :class => "form-control", :name => "user[email]", :placeholder => "email@exemplo.com", :style => "width: 95%; margin-left: 2%;" %><br>
+        <%= f.label "Senha" , :style => "margin-left: 2%;" %> <br>
+        <%= f.password_field :password, :class => "form-control", :name => "user[password]", :style => "width: 95%; margin-left: 2%;"  %><br>
+        <center><%= f.submit 'Entrar', :class => "btn btn-primary" %></center>
+      <% end %>
+      <!-- fim do formulário -->
+        <div class="dropdown-divider"></div> <!--divisoria  -->
+        <%= link_to "Esqueci minha senha", new_user_password_path, :class => "dropdown-item" %><!-- esqueci minha senha -->
+        <%= link_to "Entrar com o Facebook", user_facebook_omniauth_authorize_path, :class => "dropdown-item" %><!--Login com Facebook -->
+        <%= link_to "Novo por aqui? Cadastre-se", new_user_registration_path, :class => "dropdown-item" %><!-- novo por aqui? -->
+      <% else %>
+      <!-- conectado -->
+        <a class="dropdown-item" href="/meupedidos">Meus pedidos</a>
+        <%= link_to "Editar Perfil", edit_user_registration_path, :class => "dropdown-item" %>
+        <div class="dropdown-divider"></div> <!--divisoria  -->
+        <%= link_to "Desconectar", destroy_user_session_path, method: :delete, :class => "dropdown-item" %>
+      <% end %>
+    </div>
+  </li>
+  <!-- fim do dropdownmenu -->
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <!--  form de pesquisa -->
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Busca" aria-label="Search">
+    </form>
+    <!-- fim do form de pesquisa -->
+  </div>
+</nav>
+<!--  fim da barra de navegação -->

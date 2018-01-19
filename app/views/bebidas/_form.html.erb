@@ -1,0 +1,32 @@
+<%= form_with(model: bebida, local: true) do |form| %>
+  <% if bebida.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bebida.errors.count, "error") %> prohibited this bebida from being saved:</h2>
+
+      <ul>
+      <% bebida.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nome %>
+    <%= form.text_field :nome, id: :bebida_nome %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tamanho %>
+    <%= form.text_field :tamanho, id: :bebida_tamanho %>
+  </div>
+
+  <div class="field">
+    <%= form.label :preco %>
+    <%= form.text_field :preco, id: :bebida_preco %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

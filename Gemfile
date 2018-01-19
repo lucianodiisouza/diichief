@@ -43,7 +43,9 @@ gem 'devise', '~> 4.4'
 # devise para o usuario fazer login, e bloquear algumas páginas para o usuário final
 gem 'omniauth-facebook'
 # omniauth pra fazer login com facebook
-
+# Slider Rails
+gem 'flex-slider-rails'
+gem 'font-awesome-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

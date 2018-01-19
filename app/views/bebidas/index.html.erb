@@ -1,0 +1,34 @@
+<%= render 'layouts/header.html.erb' %>
+<p id="notice"><%= notice %></p>
+
+<h1>Bebidas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Tamanho</th>
+      <th>Preco</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bebidas.each do |bebida| %>
+      <tr>
+        <td><%= bebida.nome %></td>
+        <td><%= bebida.tamanho %></td>
+        <td><%= bebida.preco %></td>
+        <td><%= link_to 'Show', bebida %></td>
+        <td><%= link_to 'Edit', edit_bebida_path(bebida) %></td>
+        <td><%= link_to 'Destroy', bebida, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Bebida', new_bebida_path %>
+
+<%= render  'layouts/rodape' %>

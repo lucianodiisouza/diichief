@@ -1,0 +1,42 @@
+<%= form_with(model: meupedido, local: true) do |form| %>
+  <% if meupedido.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(meupedido.errors.count, "error") %> prohibited this meupedido from being saved:</h2>
+
+      <ul>
+      <% meupedido.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.number_field :user_id, id: :meupedido_user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :obs %>
+    <%= form.text_field :obs, id: :meupedido_obs %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.text_field :status, id: :meupedido_status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total %>
+    <%= form.text_field :total, id: :meupedido_total %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descricao %>
+    <%= form.text_field :descricao, id: :meupedido_descricao %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

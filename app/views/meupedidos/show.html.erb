@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @meupedido.user_id %>
+</p>
+
+<p>
+  <strong>Obs:</strong>
+  <%= @meupedido.obs %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @meupedido.status %>
+</p>
+
+<p>
+  <strong>Total:</strong>
+  <%= @meupedido.total %>
+</p>
+
+<p>
+  <strong>Descricao:</strong>
+  <%= @meupedido.descricao %>
+</p>
+
+<%= link_to 'Edit', edit_meupedido_path(@meupedido) %> |
+<%= link_to 'Back', meupedidos_path %>

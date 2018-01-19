@@ -1,0 +1,21 @@
+<script type="text/javascript">
+    (function () {
+        var options = {
+            facebook: "664131617107142", // Facebook page ID
+            whatsapp: "+5531987806772", // WhatsApp number
+            company_logo_url: "//storage.whatshelp.io/widget/24/2441/24417b1c8439031fcbce5c5df7bea865/21557581_706853589501611_1188719055547661691_n.jpg", // URL of company logo (png, jpg, gif)
+            greeting_message: "Entre em contato e faça seu pedido sem sair de casa!", // Text of greeting message
+            call_to_action: "Faça seu pedido aqui!", // Call to action
+            button_color: "#E74339", // Color of button
+            position: "right", // Position may be 'right' or 'left'
+            order: "facebook,whatsapp" // Order of buttons
+        };
+        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
+        var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+        s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+        var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    })();
+</script>
+<!-- call_to_action botao no site whatsapp e Facebook -->
+  </body>
+</html>
