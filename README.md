@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+WebApp da DiiChief
+Codificado em Ruby/Rails (latest)
+Bootstrap dita a moda
 
-Things you may want to cover:
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-* Ruby version
+> V. 1.2 - ChangeLog
 
-* System dependencies
++ Modais descritivos gerados dinamicamente para cada produto da página pizza
++ 1 nova gem implementada, para fontes icônicas
++ 1 nova gem implementada, para sliders-flex 
++ pop-over do login de usuário implementado
++ scaffold da pasta bebidas > listar bebidas cadastradas na base de dados
++ alteração de restriçaõ de algumas páginas para usuários não-cadastrados/deslogados
++ scaffold da pasta 'meupedidos' > listar pedidos do usuário conectado, esta página não será exibida com o usuário desconectado, modal para login será exibido.
 
-* Configuration
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-* Database creation
+> Commit Inicial
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
++ Scaffold
++ primeiras telas
++ concepção do projeto
