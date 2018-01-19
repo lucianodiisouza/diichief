@@ -1,77 +1,87 @@
-<% unless current_user %>
+<%= render 'layouts/header' %>
 
-<script>
- $(document).ready(function(){
-  $('#exigirLogin').modal('show');
- });
-</script>
-<!-- Modal -->
-<div class="modal fade" id="exigirLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Usuário desconectado!</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <%= form_for(:user, :url => session_path(:user)) do |f|  %>
-        <%= f.label "Email", :style => "margin-left: 2%;" %> <br>
-        <%= f.text_field :email, :value => "", :type => "email", :class => "form-control", :name => "user[email]", :placeholder => "email@exemplo.com", :style => "width: 95%; margin-left: 2%;" %><br>
-        <%= f.label "Senha" , :style => "margin-left: 2%;" %> <br>
-        <%= f.password_field :password, :class => "form-control", :name => "user[password]", :style => "width: 95%; margin-left: 2%;"  %><br>
-        <center>
-          <%= f.submit 'Entrar', :class => "btn btn-primary btn-lg" %>
-        </center>
-      <% end %>
-      <!-- fim do formulário -->
-        <div class="dropdown-divider"></div> <!--divisoria  -->
-        <%= link_to "Esqueci minha senha", new_user_password_path, :class => "dropdown-item" %><!-- esqueci minha senha -->
-        <%= link_to "Entrar com o Facebook", user_facebook_omniauth_authorize_path, :class => "dropdown-item" %><!--Login com Facebook -->
-        <%= link_to "Novo por aqui? Cadastre-se", new_user_registration_path, :class => "dropdown-item" %><!-- novo por aqui? -->
+<% unless current_user %>
+  <script>
+   $(document).ready(function(){
+    $('#exigirLogin').modal('show');
+   });
+  </script>
+  <!-- Modal -->
+  <div class="modal fade" id="exigirLogin" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Usuário desconectado!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         <%= form_for(:user, :url => session_path(:user)) do |f|  %>
+          <%= f.label "Email", :style => "margin-left: 2%;" %> <br>
+          <%= f.text_field :email, :value => "", :type => "email", :class => "form-control", :name => "user[email]", :placeholder => "email@exemplo.com", :style => "width: 95%; margin-left: 2%;" %><br>
+          <%= f.label "Senha" , :style => "margin-left: 2%;" %> <br>
+          <%= f.password_field :password, :class => "form-control", :name => "user[password]", :style => "width: 95%; margin-left: 2%;"  %><br>
+          <center>
+            <%= f.submit 'Entrar', :class => "btn btn-primary btn-lg" %>
+          </center>
+        <% end %>
+        <!-- fim do formulário -->
+          <div class="dropdown-divider"></div> <!--divisoria  -->
+          <%= link_to "Esqueci minha senha", new_user_password_path, :class => "dropdown-item" %><!-- esqueci minha senha -->
+          <%= link_to "Entrar com o Facebook", user_facebook_omniauth_authorize_path, :class => "dropdown-item" %><!--Login com Facebook -->
+          <%= link_to "Novo por aqui? Cadastre-se", new_user_registration_path, :class => "dropdown-item" %><!-- novo por aqui? -->
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <% else %>
-<%= render 'layouts/header' %>
 
-<p id="notice"><%= notice %></p>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Obs</th>
-      <th>Status</th>
-      <th>Total</th>
-      <th>Descricao</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @meupedidos.each do |meupedido| %>
-      <tr>
-        <td><%= meupedido.user_id %></td>
-        <td><%= meupedido.obs %></td>
-        <td><%= meupedido.status %></td>
-        <td><%= meupedido.total %></td>
-        <td><%= meupedido.descricao %></td>
-        <td><%= link_to 'Show', meupedido %></td>
-        <td><%= link_to 'Edit', edit_meupedido_path(meupedido) %></td>
-        <td><%= link_to 'Destroy', meupedido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+  <p id="notice"><%= notice %></p>
 <br>
+<br>
+<br>
+<br>
+
+<div class="container">
+  
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Status</th>
+            <th scope="col">Total</th>
+            <th scope="col">Obs.</th>
+          </tr>
+        </thead>
+        <% @meupedidos.each do |meupedido| %>
+        <tbody>
+          <tr>
+            <th scope="row"><%= meupedido.id %></th>
+            <td><%= meupedido.descricao %></td>
+            <td><%= meupedido.status %></td>
+            <td><%= valor_formatado(meupedido.total) %></td>
+            <td><%= meupedido.obs %></td>
+            <td>
+              <!-- <%= link_to 'Destroy', meupedido, method: :delete, data: { confirm: 'Are you sure?' } %> -->
+              <!-- <%= link_to 'Show', meupedido %> -->
+              <%= button_tag '', :class => "btn btn-success fa fa-eye", 'data-target' => "#modal", 'data-toggle' => 'modal', 'type' => 'button' %>
+              <%= link_to '', meupedido, method: :delete, data: {}, :class => "btn btn-danger fa fa-trash" %>
+              <!-- <%= button_tag '', :class => "btn btn-danger fa fa-trash", 'data-target' => "#modal", 'data-toggle' => 'modal', 'type' => 'button' %> -->
+              
+            </td>
+          </tr>
+        <% end %>  
+        </tbody>
+      </table>
+
+
+    
+  <br>
 
 <%= link_to 'New Meupedido', new_meupedido_path %>
 
-
-
 <% end %>
+</div>

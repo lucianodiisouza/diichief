@@ -3,17 +3,18 @@ class MeupedidosController < ApplicationController
   # GET /meupedidos
   # GET /meupedidos.json
   def index
-    @meupedidos = Meupedido.all
+    @meupedidos = Meupedido.where(:user_id => current_user)
   end
 
   # GET /meupedidos/1
   # GET /meupedidos/1.json
   def show
+   
   end
 
   # GET /meupedidos/new
   def new
-    @meupedido = Meupedido.new
+    @meupedido = Meupedido.new :user_id => current_user.id
   end
 
   # GET /meupedidos/1/edit
@@ -22,6 +23,7 @@ class MeupedidosController < ApplicationController
 
   # POST /meupedidos
   # POST /meupedidos.json
+  
   def create
     @meupedido = Meupedido.new(meupedido_params)
 
