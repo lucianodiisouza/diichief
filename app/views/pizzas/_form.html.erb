@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :tamanho %>
-    <%= form.text_field :tamanho, id: :pizza_tamanho %>
+    <%= form.select :tamanho, [['Individual - 4 Fatias', 'M'], ['Tradicional - 8 Fatias', 'G'], ['Gigante - 10 Fatias', 'GG'], ['Família - 12 Fatias', 'XG']] %>
   </div>
 
   <div class="field">
