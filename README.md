@@ -3,6 +3,16 @@
 WebApp da DiiChief
 Codificado em Ruby/Rails (latest)
 Bootstrap dita a moda
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+> V. 1.2.2 - ChangeLog
+
++ Reorganização do arquivo de rotas
++ Bugfix: Precificação estava arredondando na view e na base de dados, tipo de dados estava incorreto.
++ ComboBox adicionado no formulário para cadastro dos sabores
++ alteração do campo user_id no formulário de pedidos, para hidden_field, o user_id é um parâmetro que deverá ser passado em Hidden!
+
  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 > V. 1.2.1 - ChangeLog
