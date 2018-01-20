@@ -6,6 +6,12 @@ Bootstrap dita a moda
 
  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
+> V. 1.2.3 - ChangeLog
+
++ Adição do arquivo TODO.txt, nele serão listadas todas as futuras implementações, em ordem e grau de importância, tal como possíveis recursos à serem implementados no sistema, TO DO = à fazer, sacou ? 
+
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 > V. 1.2.2 - ChangeLog
 
 + Reorganização do arquivo de rotas
