@@ -1,0 +1,10 @@
+Próximas implementações / TODO List
+
+* 	setar modal com descrição dos produtos
+* 	implementar o 'carrinho de compras'
+*	setar as páginas bebidas, massas e outros
+* 	criar página do usuário com endereço, telefone e informações mais completas
+*	implementar sistema de pagamento 
+* 	setar painel 'meuspedidos' o botão delete só pode apagar registros com status  (na fila, em processamento)
+*	migrar banco de dados para postgresql ou mysql
+* 	configurar envoronment de produção
