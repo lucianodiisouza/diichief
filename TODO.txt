@@ -1,5 +1,6 @@
 Próximas implementações / TODO List
 
+* 	adicionar imagem por url no banco de dados
 * 	setar modal com descrição dos produtos
 * 	implementar o 'carrinho de compras'
 *	setar as páginas bebidas, massas e outros
